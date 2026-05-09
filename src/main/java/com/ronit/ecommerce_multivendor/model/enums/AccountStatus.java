@@ -1,0 +1,10 @@
+package com.ronit.ecommerce_multivendor.model.enums;
+
+public enum AccountStatus {
+    PENDING_VERIFICATION,          // ACCOUNT IS CREATED BUT NOT YET VERIFIED
+    ACTIVE,                        // ACCOUNT IS ACTIVE AND IN GOOD STANDING
+    SUSPENDED,                     // ACCOUNT IS TEMPORARILY SUSPENDED, POSSIBLE DUE TO VIOLATION
+    DEACTIVATED,                   // ACCOUNT IS DEACTIVATED, USER MAY HAVE CHOSEN IT TO DEACTIVATE
+    BANNED,                        // ACCOUNT IS PERMANENTLY BANNED DUE TO SEVERE VIOLATIONS
+    CLOSED                         // ACCOUNT IS PERMANENTLY CLOSED, POSSIBLY AT USER REQUEST
+}
