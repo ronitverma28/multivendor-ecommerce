@@ -6,6 +6,8 @@ import com.ronit.ecommerce_multivendor.service.ProductService;
 import com.ronit.ecommerce_multivendor.utils.ApiResponse;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -67,7 +69,7 @@ public class ProductController {
 
     @PatchMapping("/{id}/quantity")
     @PreAuthorize("hasRole('SELLER')")
-    public ResponseEntity<ApiResponse<ProductResponse>> updateInventory(Authentication authentication, @PathVariable Long id, @Valid @RequestBody Integer quantity){
+    public ResponseEntity<ApiResponse<ProductResponse>> updateInventory(Authentication authentication, @PathVariable Long id, @Valid @Min(value = 0, message = "Cannot set quantity less than 0") @RequestBody Integer quantity){
         return ResponseEntity.ok(ApiResponse.ok("Product quantity updated successfully", productService.updateInventory(authentication.getName(), id, quantity)));
     }
 
