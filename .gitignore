@@ -1,9 +1,31 @@
-HELP.md
-AGENTS.md
+# ===============================
+# Maven / Build
+# ===============================
 target/
+!.mvn/wrapper/maven-wrapper.jar
 
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
 
-### STS ###
+# ===============================
+# Environment Files
+# ===============================
+.env
+.env.*
+application-local.properties
+
+# ===============================
+# OS Files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# STS / Spring Tool Suite
+# ===============================
 .apt_generated
 .classpath
 .factorypath
@@ -12,26 +34,50 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# ===============================
+# IntelliJ IDEA
+# ===============================
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
-### NetBeans ###
+# ===============================
+# VS Code
+# ===============================
+.vscode/
+
+# ===============================
+# NetBeans
+# ===============================
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 build/
+
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode
+# ===============================
+# Mac/Linux temp files
+# ===============================
+*~
+*.swp
 
+# ===============================
+# Docker
+# ===============================
+docker-compose.override.yml
 
-### DESIGN ###
-docs
+# ===============================
+# Documentation / Design Files
+# ===============================
+docs/
 
+# ===============================
+# Generated files
+# ===============================
+coverage/
