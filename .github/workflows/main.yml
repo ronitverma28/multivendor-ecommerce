@@ -1,6 +1,6 @@
 name: CI/CD Pipeline for Spring Boot Ecommerce Backend
 
-# Trigger workflow on push or PR to main branch
+# Trigger workflow on push or PR to main
 on:
   push:
     branches:
@@ -69,5 +69,4 @@ jobs:
 
       # Trigger Render deployment
       - name: Trigger Render Deployment
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
