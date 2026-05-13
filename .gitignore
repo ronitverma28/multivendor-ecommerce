@@ -31,8 +31,6 @@ build/
 ### VS Code ###
 .vscode
 
-### GITHUB ###
-.github
 
 ### DESIGN ###
 docs
