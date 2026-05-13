@@ -107,11 +107,24 @@ public class Mapper {
                 .build();
     }
 
-    private static SellerSummary toSellerSummary(Seller seller) {
+    public static SellerSummary toSellerSummary(Seller seller) {
         return SellerSummary.builder()
                 .id(seller.getId())
                 .gstin(seller.getGstin())
                 .sellerName(seller.getSellerName())
+                .build();
+    }
+
+    public static SellerReportResponse toResponse(SellerReport sellerReport){
+        return SellerReportResponse.builder()
+                .totalEarnings(sellerReport.getTotalEarnings())
+                .totalSales(sellerReport.getTotalSales())
+                .totalRefunds(sellerReport.getTotalRefunds())
+                .totalTax(sellerReport.getTotalTax())
+                .netEarnings(sellerReport.getNetEarnings())
+                .totalOrders(sellerReport.getTotalOrders())
+                .canceledOrders(sellerReport.getCanceledOrders())
+                .totalTransactions(sellerReport.getTotalTransactions())
                 .build();
     }
 }

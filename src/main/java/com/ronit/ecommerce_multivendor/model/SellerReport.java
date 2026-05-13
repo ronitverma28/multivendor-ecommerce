@@ -29,9 +29,9 @@ public class SellerReport {
 
     private Long netEarnings = 0L;
 
-    private int totalOrders = 0;
+    private Integer totalOrders = 0;
 
-    private int canceledOrders = 0;
+    private Integer canceledOrders = 0;
 
-    private int totalTransactions = 0;
+    private Integer totalTransactions = 0;
 }

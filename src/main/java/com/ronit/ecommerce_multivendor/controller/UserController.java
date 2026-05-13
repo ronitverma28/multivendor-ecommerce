@@ -35,15 +35,15 @@ public class UserController {
         return ResponseEntity.ok(ApiResponse.ok("Customer updated successfully", userService.update(authentication.getName(), userRequest)));
     }
 
-    @GetMapping
+    @GetMapping("/{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<UserResponse>> getById(@RequestParam String email){
+    public ResponseEntity<ApiResponse<UserResponse>> getById(@PathVariable String email){
         return ResponseEntity.ok(ApiResponse.ok("Customer fetched successfully", userService.getByEmail(email)));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Void>> delete(@RequestParam String email){
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String email){
         userService.delete(email);
         return ResponseEntity.ok(ApiResponse.ok("Customer deleted successfully", null));
     }

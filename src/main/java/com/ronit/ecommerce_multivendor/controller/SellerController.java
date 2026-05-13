@@ -1,6 +1,7 @@
 package com.ronit.ecommerce_multivendor.controller;
 
 import com.ronit.ecommerce_multivendor.dto.request.SellerRequest;
+import com.ronit.ecommerce_multivendor.dto.response.SellerReportResponse;
 import com.ronit.ecommerce_multivendor.dto.response.SellerResponse;
 import com.ronit.ecommerce_multivendor.service.SellerService;
 import com.ronit.ecommerce_multivendor.utils.ApiResponse;
@@ -22,14 +23,27 @@ public class SellerController {
     private final SellerService sellerService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<SellerResponse>> create(Authentication authentication, @RequestParam Long addressId, @Valid @RequestBody SellerRequest sellerRequest) {
-        return ResponseEntity.ok(ApiResponse.ok("Seller created successfully", sellerService.create(authentication.getName(), addressId, sellerRequest)));
+    @PreAuthorize("hasRole('CUSTOMER')")
+    public ResponseEntity<ApiResponse<SellerResponse>> createSeller(Authentication authentication, @Valid @RequestBody SellerRequest sellerRequest) {
+        return ResponseEntity.ok(ApiResponse.ok("Seller created successfully", sellerService.createSeller(authentication.getName(), sellerRequest)));
     }
 
-    @GetMapping
+    @GetMapping("/profile")
+    @PreAuthorize("hasRole('SELLER')")
+    public ResponseEntity<ApiResponse<SellerResponse>> getSellerProfile(Authentication authentication){
+        return ResponseEntity.ok(ApiResponse.ok("Seller profile fetched successfully", sellerService.getSellerProfile(authentication.getName())));
+    }
+
+    @GetMapping("/report")
+    @PreAuthorize("hasRole('SELLER')")
+    public ResponseEntity<ApiResponse<SellerReportResponse>> getSellerReport(Authentication authentication){
+        return ResponseEntity.ok(ApiResponse.ok("Seller Report fetched successfully", sellerService.getSellerReport(authentication.getName())));
+    }
+
+    @GetMapping("/{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<SellerResponse>> getByEmail(@RequestParam String email){
-        return ResponseEntity.ok(ApiResponse.ok("Seller fetched successfully", sellerService.getByEmail(email)));
+    public ResponseEntity<ApiResponse<SellerResponse>> getSellerByEmail(@PathVariable String email){
+        return ResponseEntity.ok(ApiResponse.ok("Seller fetched successfully", sellerService.getSellerByEmail(email)));
     }
 
     @GetMapping("/all")
@@ -38,31 +52,30 @@ public class SellerController {
         return ResponseEntity.ok(ApiResponse.ok("All Sellers fetched successfully", sellerService.getAllSellers(pageable)));
     }
 
-    @PutMapping
+    @PutMapping("/profile")
     @PreAuthorize("hasRole('SELLER')")
-    public ResponseEntity<ApiResponse<SellerResponse>> update(Authentication authentication, @RequestParam Long addressId, @Valid @RequestBody SellerRequest sellerRequest){
-        return ResponseEntity.ok(ApiResponse.ok("Seller updated successfully", sellerService.update(authentication.getName(), addressId, sellerRequest)));
+    public ResponseEntity<ApiResponse<SellerResponse>> updateSeller(Authentication authentication, @Valid @RequestBody SellerRequest sellerRequest){
+        return ResponseEntity.ok(ApiResponse.ok("Seller updated successfully", sellerService.updateSellerProfile(authentication.getName(), sellerRequest)));
     }
 
     @DeleteMapping
     @PreAuthorize("hasRole('SELLER')")
-    public ResponseEntity<ApiResponse<Void>> delete(Authentication authentication){
-        sellerService.delete(authentication.getName());
+    public ResponseEntity<ApiResponse<Void>> deleteSeller(Authentication authentication){
+        sellerService.deleteSeller(authentication.getName());
         return ResponseEntity.ok(ApiResponse.ok("Seller deleted successfully", null));
     }
 
-    @DeleteMapping("/by-email")
+    @DeleteMapping("/{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Void>> deleteByEmail(@RequestParam String email){
-        sellerService.deleteByEmail(email);
+    public ResponseEntity<ApiResponse<Void>> deleteSellerByEmail(@PathVariable String email){
+        sellerService.deleteSellerByEmail(email);
         return ResponseEntity.ok(ApiResponse.ok("Seller deleted successfully", null));
     }
 
-    @GetMapping("/verify")
+    @PatchMapping("/status/{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Void>> verifySeller(@RequestParam String email){
-        sellerService.verifySeller(email);
+    public ResponseEntity<ApiResponse<Void>> updateSellerStatus(@PathVariable String email){
+        sellerService.updateSellerStatus(email);
         return ResponseEntity.ok(ApiResponse.ok("Seller verified successfully", null));
     }
-    
 }

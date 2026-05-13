@@ -27,4 +27,8 @@ public class SellerRequest {
     private String accountHolderName;
     private String accountNumber;
     private String ifscCode;
+
+//  Pickup Address
+    private Long addressId;
+
 }

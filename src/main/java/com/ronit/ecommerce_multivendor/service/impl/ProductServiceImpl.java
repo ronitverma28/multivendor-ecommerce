@@ -110,7 +110,7 @@ public class ProductServiceImpl implements ProductService {
         Seller seller = sellerRepository.findByUser_Email(email).orElseThrow(() -> new ResourceNotFoundException("Seller not found with id : " + email));
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found with id : " + productId));
 
-        if(!product.getSeller().equals(seller)) throw new BadCredentialsException("You can't update the product with id : " + productId);
+        if(!product.getSeller().equals(seller)) throw new BadCredentialsException("You can't updateSellerProfile the product with id : " + productId);
 
         product.setQuantity(quantity);
         return Mapper.toResponse(productRepository.save(product));
