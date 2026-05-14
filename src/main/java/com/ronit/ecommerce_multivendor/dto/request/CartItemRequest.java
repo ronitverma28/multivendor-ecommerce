@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartAddRequest {
+public class CartItemRequest {
     @NotNull(message = "Product id is required")
     private Long productId;
 

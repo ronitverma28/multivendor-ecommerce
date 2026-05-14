@@ -88,7 +88,7 @@ public class Mapper {
                 .build();
     }
 
-    public static ProductResponse toResponse(Product product){
+    public static ProductResponse toResponse(Product product) {
         return ProductResponse.builder()
                 .id(product.getId())
                 .title(product.getTitle())
@@ -115,7 +115,7 @@ public class Mapper {
                 .build();
     }
 
-    public static SellerReportResponse toResponse(SellerReport sellerReport){
+    public static SellerReportResponse toResponse(SellerReport sellerReport) {
         return SellerReportResponse.builder()
                 .totalEarnings(sellerReport.getTotalEarnings())
                 .totalSales(sellerReport.getTotalSales())
@@ -125,6 +125,37 @@ public class Mapper {
                 .totalOrders(sellerReport.getTotalOrders())
                 .canceledOrders(sellerReport.getCanceledOrders())
                 .totalTransactions(sellerReport.getTotalTransactions())
+                .build();
+    }
+
+    public static CartResponse toResponse(Cart cart) {
+        return CartResponse.builder()
+                .id(cart.getId())
+                .cartItems(cart.getCartItems().stream().map(Mapper::toResponse).toList())
+                .totalSellingPrice(cart.getTotalSellingPrice())
+                .totalMrpPrice(cart.getTotalMrpPrice())
+                .totalItem(cart.getTotalItem())
+                .discount(cart.getDiscount())
+                .couponCode(cart.getCouponCode())
+                .build();
+    }
+
+    public static CartItemResponse toResponse(CartItem cartItem) {
+        return CartItemResponse.builder()
+                .cartItemId(cartItem.getId())
+                .productId(cartItem.getProduct().getId())
+                .productTitle(cartItem.getProduct().getTitle())
+                .productImage(
+                        cartItem.getProduct().getImages() != null &&
+                                !cartItem.getProduct().getImages().isEmpty()
+                                ? cartItem.getProduct().getImages().getFirst()
+                                : null
+                )
+                .size(cartItem.getSize())
+                .quantity(cartItem.getQuantity())
+                .mrpPrice(cartItem.getMrpPrice())
+                .sellingPrice(cartItem.getSellingPrice())
+                .lineTotal(cartItem.getSellingPrice())
                 .build();
     }
 }
