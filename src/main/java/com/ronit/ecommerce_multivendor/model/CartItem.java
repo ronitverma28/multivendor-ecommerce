@@ -3,6 +3,7 @@ package com.ronit.ecommerce_multivendor.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CartItem {
 
     @Id
@@ -20,14 +22,14 @@ public class CartItem {
     @JsonIgnore
     private Cart cart;
 
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     private String size;
 
-    private int quantity = 1;
+    @Builder.Default
+    private Integer quantity = 1;
 
     private Integer mrpPrice;
 

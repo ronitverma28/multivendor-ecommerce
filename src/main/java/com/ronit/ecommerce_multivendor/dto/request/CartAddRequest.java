@@ -1,7 +1,9 @@
 package com.ronit.ecommerce_multivendor.dto.request;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,8 @@ public class CartAddRequest {
     @NotNull(message = "Product id is required")
     private Long productId;
 
+    @NotBlank(message = "Size is required")
+    @Pattern(regexp = "^(S|M|L|XL|XXL|XXXL|28|30|32|34|36|38|40)$")
     private String size;
 
     @NotNull(message = "Quantity is required")

@@ -13,11 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartResponse {
-    private Long cartId;
-
-    @Builder.Default
-    private List<CartItemResponse> items = new ArrayList<>();
-
-    private PriceSummaryResponse priceSummary;
+    private Long id;
+    private List<CartItemResponse> cartItems;
+    private Double totalSellingPrice;
+    private Integer totalMrpPrice;
+    private Double discount;
+    private Integer totalItem;
     private String couponCode;
 }

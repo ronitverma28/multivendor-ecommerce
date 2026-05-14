@@ -2,6 +2,7 @@ package com.ronit.ecommerce_multivendor.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cart {
 
     @Id
@@ -23,15 +25,16 @@ public class Cart {
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private Set<CartItem> cartItems = new HashSet<>();
 
-    private double totalSellingPrice;
+    private Double totalSellingPrice;
 
-    private int totalItem;
+    private Integer totalItem;
 
-    private int totalMrpPrice;
+    private Integer totalMrpPrice;
 
-    private double discount;
+    private Double discount;
 
     private String couponCode;
 }
