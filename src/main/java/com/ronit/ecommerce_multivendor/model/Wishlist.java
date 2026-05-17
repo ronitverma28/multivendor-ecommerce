@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Wishlist {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

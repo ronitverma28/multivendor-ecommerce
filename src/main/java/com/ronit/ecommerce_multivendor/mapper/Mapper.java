@@ -158,4 +158,12 @@ public class Mapper {
                 .lineTotal(cartItem.getSellingPrice())
                 .build();
     }
+
+    public static WishlistResponse toResponse(Wishlist wishlist){
+        return WishlistResponse.builder()
+                .products(wishlist.getProducts().stream().map(Mapper::toResponse).toList())
+                .totalItems(wishlist.getProducts().size())
+                .wishlistId(wishlist.getId())
+                .build();
+    }
 }

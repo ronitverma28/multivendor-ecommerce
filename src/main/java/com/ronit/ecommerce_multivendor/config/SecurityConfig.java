@@ -51,7 +51,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/categories/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/customers").permitAll()
                         .requestMatchers("/categories/**").hasRole("ADMIN")
-                        .requestMatchers("/cart/**").hasRole("CUSTOMER")
+                        .requestMatchers("/cart/**", "/wishlist/**").hasRole("CUSTOMER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
