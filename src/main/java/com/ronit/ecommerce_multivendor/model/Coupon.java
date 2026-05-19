@@ -20,12 +20,12 @@ public class Coupon {
     private Long id;
 
     private String code;
-    private double discountPercentage;
+    private Double discountPercentage;
     private LocalDate validityStartDate;
     private LocalDate validityEndDate;
-    private double minimumOrderValue;
+    private Double minimumOrderValue;
 
-    private boolean isActive = true;
+    private Boolean isActive = true;
 
     @ManyToMany(mappedBy = "usedCoupons")
     private Set<User> users = new HashSet<>();
